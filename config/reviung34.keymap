@@ -1,0 +1,152 @@
+/*
+ * Copyright (c) 2020 The ZMK Contributors
+ *
+ * SPDX-License-Identifier: MIT
+ */
+
+#include <behaviors.dtsi>
+#include <dt-bindings/zmk/bt.h>
+#include <dt-bindings/zmk/keys.h>
+
+#define DEFAULT  0
+#define NUM_MODS 1
+#define BT_CTRL  2
+#define CE 2
+#define CR 3
+#define CT 4
+#define CU 6
+#define CI 7
+#define CD 12
+#define CF 13
+#define CG 14
+#define CH 15
+#define CJ 16
+#define CK 17
+#define CC 22
+#define CV 23
+#define CM 26
+#define CCOMMA 27
+#define QUICK_TAP_MS 150
+
+/ {
+    macros {
+        ZMK_MACRO(enie_lower,
+
+        wait-ms = <20>;
+        tap-ms = <20>;
+        bindings =
+            <&macro_press   &kp LALT>,
+            <&macro_tap     &kp KP_N0 &kp KP_N2 &kp KP_N4 &kp KP_N1>,
+            <&macro_release &kp LALT>;
+
+        )
+        ZMK_MACRO(
+
+        enie_upper,
+        wait-ms = <20>;
+        tap-ms = <20>;
+        bindings =
+            <&macro_press   &kp LALT>,
+            <&macro_tap     &kp KP_N0 &kp KP_N2 &kp KP_N0 &kp KP_N9>,
+            <&macro_release &kp LALT>;
+
+        )
+        ZMK_MACRO(
+
+        at_at,
+        wait-ms = <30>;
+        tap-ms = <30>;
+        bindings = <&kp AT &kp AT>;
+
+        )
+    };
+
+    combos {
+        compatible = "zmk,combos";
+
+        esc {
+            bindings = <&kp ESCAPE>;
+            key-positions = <0 1>;
+        };
+    };
+
+    behaviors {
+        hm: homerow_mods {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HOMEROW_MODS";
+            #binding-cells = <2>;
+            tapping-term-ms = <250>;
+            quick-tap-ms = <QUICK_TAP_MS>;
+            flavor = "tap-preferred";
+            bindings = <&kp>, <&kp>;
+        };
+
+        hl: homerow_layers {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HOMEROW_LAYERS";
+            #binding-cells = <2>;
+            tapping-term-ms = <150>;
+            quick-tap-ms = <QUICK_TAP_MS>;
+            flavor = "tap-preferred";
+            bindings = <&mo>, <&kp>;
+        };
+
+        tabspace: tab_space {
+            compatible = "zmk,behavior-mod-morph";
+            label = "TAB_SPACE";
+            #binding-cells = <0>;
+            bindings = <&mt LSHIFT SPACE>, <&kp TAB>;
+
+            mods = <(MOD_LALT | MOD_RALT)>;
+        };
+
+        enie: enie {
+            compatible = "zmk,behavior-mod-morph";
+            label = "ENIE";
+            #binding-cells = <0>;
+            bindings = <&enie_lower>, <&enie_upper>;
+
+            mods = <(MOD_LSFT | MOD_RSFT)>;
+        };
+    };
+
+    keymap {
+        compatible = "zmk,keymap";
+
+        default_layer {
+            bindings = <
+&hm ESCAPE Q  &kp W        &kp E        &kp R                 &kp T          &kp Y        &kp U          &kp I  &kp O      &kp P
+&hm TAB A     &kp S        &kp D        &kp F                 &kp G          &kp H        &kp J          &kp K  &kp L      &kp SEMICOLON
+&hm LC(Z) Z   &hm LC(X) X  &hm LC(C) C  &hm LC(V) V           &kp B          &kp B        &kp N          &kp M  &kp COMMA  &mt QMARK FSLH
+                                        &hm LEFT_SHIFT ENTER  &lt 1 SPACE    &lt 2 SPACE  &kp BACKSPACE
+            >;
+        };
+
+        num_mods {
+            bindings = <
+&kp NUMBER_1  &kp NUMBER_2    &kp NUMBER_3    &kp NUMBER_4     &kp NUMBER_5    &kp NUMBER_6  &kp N7  &kp NUMBER_8  &kp N9     &kp NUMBER_0
+&kp DELETE    &trans          &kp UP_ARROW    &trans           &trans          &trans        &trans  &kp MINUS     &kp EQUAL  &kp SQT
+&trans        &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT_ARROW  &trans          &trans        &trans  &trans        &kp DOT    &trans
+                                              &trans           &trans          &trans        &trans
+            >;
+        };
+
+        f_mods {
+            bindings = <
+&kp F2  &kp F3  &kp F5  &kp F11  &kp PRINTSCREEN    &trans  &trans          &trans             &trans      &mo 3
+&trans  &trans  &trans  &trans   &trans             &trans  &trans          &kp C_VOLUME_UP    &trans      &trans
+&trans  &trans  &trans  &trans   &trans             &trans  &kp K_PREVIOUS  &kp C_VOLUME_DOWN  &kp K_NEXT  &trans
+                        &trans   &trans             &trans  &trans
+            >;
+        };
+
+        bt_layer {
+            bindings = <
+&trans  &trans  &trans  &trans  &trans    &bt BT_CLR  &bt BT_SEL 1   &bt BT_SEL 2   &bt BT_SEL 3   &trans
+&trans  &trans  &trans  &trans  &trans    &trans      &bt BT_DISC 1  &bt BT_DISC 2  &bt BT_DISC 3  &trans
+&trans  &trans  &trans  &trans  &trans    &trans      &trans         &trans         &trans         &trans
+                        &trans  &trans    &trans      &trans
+            >;
+        };
+    };
+};
