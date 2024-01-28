@@ -108,6 +108,13 @@
 
             mods = <(MOD_LSFT | MOD_RSFT)>;
         };
+
+        qut: qut {
+            compatible = "zmk,behavior-tap-dance";
+            label = "QUT";
+            #binding-cells = <0>;
+            bindings = <&kp LS(COMMA)>, <&kp DOT>;
+        };
     };
 
     keymap {
@@ -115,10 +122,10 @@
 
         default_layer {
             bindings = <
-&hm ESCAPE Q  &kp W        &kp E        &kp R                 &kp T          &kp Y        &kp U          &kp I  &kp O      &kp P
-&hm TAB A     &kp S        &kp D        &kp F                 &kp G          &kp H        &kp J          &kp K  &kp L      &kp SEMICOLON
-&hm LC(Z) Z   &hm LC(X) X  &hm LC(C) C  &hm LC(V) V           &kp B          &kp B        &kp N          &kp M  &kp COMMA  &mt QMARK FSLH
-                                        &hm LEFT_SHIFT ENTER  &lt 1 SPACE    &lt 2 SPACE  &kp BACKSPACE
+&hm ESCAPE Q  &kp W        &kp E        &kp R        &kp T                   &kp Y          &kp U        &kp I  &kp O  &kp P
+&hm TAB A     &kp S        &kp D        &kp F        &kp G                   &kp H          &kp J        &kp K  &kp L  &kp SEMICOLON
+&hm LC(Z) Z   &hm LC(X) X  &hm LC(C) C  &hm LC(V) V  &kp B                   &kp B          &kp N        &kp M  &qut   &mt QMARK FSLH
+                                        &lt 1 SPACE  &hm LEFT_SHIFT ENTER    &kp BACKSPACE  &lt 2 SPACE
             >;
         };
 
