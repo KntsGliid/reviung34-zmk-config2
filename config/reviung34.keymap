@@ -113,7 +113,7 @@
             compatible = "zmk,behavior-tap-dance";
             label = "QUT";
             #binding-cells = <0>;
-            bindings = <&kp LS(COMMA)>, <&kp DOT>;
+            bindings = <&kp COMMA>, <&kp DOT>;
         };
     };
 
