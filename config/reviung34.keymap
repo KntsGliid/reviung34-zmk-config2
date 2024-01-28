@@ -61,14 +61,7 @@
         )
     };
 
-    combos {
-        compatible = "zmk,combos";
-
-        esc {
-            bindings = <&kp ESCAPE>;
-            key-positions = <0 1>;
-        };
-    };
+    combos { compatible = "zmk,combos"; };
 
     behaviors {
         hm: homerow_mods {
@@ -122,10 +115,10 @@
 
         default_layer {
             bindings = <
-&hm ESCAPE Q  &kp W        &kp E        &kp R        &kp T                   &kp Y          &kp U        &kp I  &kp O  &kp P
-&hm TAB A     &kp S        &kp D        &kp F        &kp G                   &kp H          &kp J        &kp K  &kp L  &kp SEMICOLON
-&hm LC(Z) Z   &hm LC(X) X  &hm LC(C) C  &hm LC(V) V  &kp B                   &kp B          &kp N        &kp M  &qut   &mt QMARK FSLH
-                                        &lt 1 SPACE  &hm LEFT_SHIFT ENTER    &kp BACKSPACE  &lt 2 SPACE
+&hm ESCAPE Q  &kp W        &kp E        &kp R                 &kp T          &kp Y        &kp U          &kp I  &kp O  &kp P
+&hm TAB A     &kp S        &kp D        &kp F                 &kp G          &kp H        &kp J          &kp K  &kp L  &mt LS(SEMICOLON) SEMICOLON
+&hm LC(Z) Z   &hm LC(X) X  &hm LC(C) C  &hm LC(V) V           &mt LCTRL B    &kp B        &kp N          &kp M  &qut   &mt QMARK FSLH
+                                        &hm LEFT_SHIFT ENTER  &lt 1 SPACE    &lt 2 SPACE  &kp BACKSPACE
             >;
         };
 
